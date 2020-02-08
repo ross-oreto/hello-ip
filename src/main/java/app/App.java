@@ -14,6 +14,12 @@ public class App extends Jooby {
   }
 
   {
+    setRouterOptions(RouterOption.IGNORE_TRAILING_SLASH);
+    setServerOptions(new ServerOptions().setPort(System.getenv("PORT") == null
+            ? getEnvironment().getConfig().getInt("server.port")
+            : Integer.parseInt(System.getenv("PORT"))
+    ));
+
     install(new JacksonModule());
 
     get("/", ctx -> {
