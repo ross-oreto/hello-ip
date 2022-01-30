@@ -24,7 +24,9 @@ public class App extends Jooby {
 
     get("/", ctx -> {
       ctx.setResponseType(MediaType.json);
-      Map<String, Object> data = new HashMap<String, Object>() {{ put("ip", getIp(ctx)); }};
+      Map<String, Object> data = new HashMap<>() {{
+        put("ip", getIp(ctx));
+      }};
       ValueNode name = ctx.query("name");
       if (name.isSingle()) data.put("greeting", String.format("Greetings %s", name.value()));
       ctx.setResponseHeader("x-hello-world", "MRO");
